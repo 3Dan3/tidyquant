@@ -3,10 +3,16 @@ title: "ETFs"
 author: "DanielH"
 date: "December 27, 2018"
 output:
+  github_document:
+    toc: true
+    toc_depth: 2
+  output:
+  html_document: default
   html_notebook:
     theme: readable
-  html_document: default
   pdf_document: default
+  keep_md: yes
+
 ---
 
 ```{r, message=FALSE}
@@ -22,11 +28,11 @@ library(knitr)
 theme_set(theme_minimal())
 ```
 
-## ETFs analysis
+# ETFs analysis
 
 Here we want to get the period returns ofr ETFs, on both a monthly and yearly basis
 
-#### XLK case
+## XLK case
 
 https://www.etf.com/XLK#overview
 
@@ -78,7 +84,7 @@ xlk_yearly_returns %>%
   
 ```
 
-#### Vanguard S&P 500 case
+## Vanguard S&P 500 case
 
 The  (_NYSEARCA: VOO_) is one of Vanguard's lowest-cost ETFs with a 0.04% expense ratio. It is also among the largest with $310.7 billion in assets under management (AUM), according to Vanguard's website. The fund's objective is to track the performance of the Standard & Poor's 500 Index. Its top holdings are Apple Inc. (_NASDAQ: AAPL_), Microsoft Corp. (_NASDAQ: MSFT_), and Alphabet Inc. (_NASDAQ: GOOGL_).
 
@@ -132,7 +138,7 @@ vanguard_sp500_yearly_returns %>%
 
 ```
 
-#### Vanguard Total Stock Market case
+## Vanguard Total Stock Market case
 
 The Vanguard Total Stock Market ETF (_NYSEARCA: VTI_) is Vanguard's oldest and largest ETF with $549.6 billion in AUM. For a rock bottom fee of 0.04% the fund covers the entire U.S. stock market. Its top holdings are Apple, Alphabet, and Microsoft.
 
