@@ -84,12 +84,8 @@ dij_daily_returns <-
                mutate_fun = periodReturn,
                period     = "daily",
                col_rename = "Rb")
-```
 
-    ## Warning in to_period(xx, period = on.opts[[period]], ...): missing values
-    ## removed from data
 
-``` r
 # plot daily returns
 dij_daily_returns %>%
   ggplot(aes(date, Rb)) +
@@ -116,7 +112,12 @@ dij_monthly_returns <-
                mutate_fun = periodReturn,
                period     = "monthly",
                col_rename = "Rb")
+```
 
+    ## Warning in to_period(xx, period = on.opts[[period]], ...): missing values
+    ## removed from data
+
+``` r
 # plot monthly returns
 dij_monthly_returns %>%
   ggplot(aes(date, Rb)) +
@@ -144,12 +145,8 @@ dji_yearly_returns <-
                mutate_fun = periodReturn,
                period     = "yearly",
                col_rename = "Rb")
-```
 
-    ## Warning in to_period(xx, period = on.opts[[period]], ...): missing values
-    ## removed from data
 
-``` r
 # plot yearly returns
 dji_yearly_returns  %>%
   ggplot(aes(year(date), Rb)) +
@@ -180,8 +177,7 @@ nasdaq_daily_returns <-
                col_rename = "Rb")
 
 # plot daily returns
-daily_plot <-
-  nasdaq_daily_returns %>%
+nasdaq_daily_returns %>%
   ggplot(aes(date, Rb)) +
   geom_line(color = "goldenrod4") +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
@@ -189,7 +185,11 @@ daily_plot <-
   labs(title = "NASDAQ daily returns",
        subtitle = "2005 - 2018",
         x = "", y = "")
+```
 
+![](indexes_files/figure-markdown_github/unnamed-chunk-4-1.png)
+
+``` r
 # NASDAQ monthly returns
 nasdaq_monthly_returns <-
   "^IXIC" %>%
@@ -203,8 +203,7 @@ nasdaq_monthly_returns <-
 
 
 # plot monthly returns
-monthly_plot <-
-  nasdaq_monthly_returns %>%
+nasdaq_monthly_returns %>%
   ggplot(aes(date, Rb)) +
   geom_line(color = "goldenrod4", size = .03) +
   geom_point(color = "goldenrod4",size = 1.25) +
@@ -214,10 +213,13 @@ monthly_plot <-
   labs(title = "NASDAQ monthly returns",
        subtitle = "2005 - 2018",
         x = "", y = "")
+```
 
+![](indexes_files/figure-markdown_github/unnamed-chunk-4-2.png)
 
+``` r
 # NASDAQ yearly returns
-nasdaq_yearly_return <-
+nasdaq_yearly_returns <-
   "^IXIC" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
@@ -229,8 +231,7 @@ nasdaq_yearly_return <-
 
 
 # plot yearly returns
-yearly_plot <-
-  nasdaq_yearly_return %>%
+nasdaq_yearly_returns %>%
   ggplot(aes(year(date), Rb)) +
   geom_bar(stat = "identity", fill = "goldenrod4") +
   scale_x_continuous(breaks =  seq.int(2005, 2018, 1)) +
@@ -238,11 +239,13 @@ yearly_plot <-
   labs(title = "NASDAQ yearly returns",
        subtitle = "2005 - 2018",
         x = "", y = "")
+```
 
-  
+![](indexes_files/figure-markdown_github/unnamed-chunk-4-3.png)
+
+``` r
 # plot growth
-growth_plot <-
-  nasdaq_daily_returns %>%
+nasdaq_daily_returns %>%
   mutate(cumul = cumsum(Rb)) %>%
   ggplot(aes(date, cumul)) +
   geom_line(color = "goldenrod4") +
@@ -252,12 +255,8 @@ growth_plot <-
   labs(title = "NASDAQ performance",
        subtitle = "2005 - 2018",
         x = "", y = "")
-
-
-# put together
-grid.arrange(daily_plot, monthly_plot, yearly_plot, growth_plot)
 ```
 
     ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 
-![](indexes_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](indexes_files/figure-markdown_github/unnamed-chunk-4-4.png)
