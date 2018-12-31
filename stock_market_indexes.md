@@ -539,7 +539,7 @@ russ2000_yearly_returns %>%
                                      hjust = 0.5,
                                      face = "italic")) +
   labs(title = "Russell 2000 Yearly returns",
-       subtitle = "2010 - 2018",
+       subtitle = "2005 - 2018",
        x = "", y = "")
 ```
 
