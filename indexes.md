@@ -112,12 +112,7 @@ dij_monthly_returns <-
                mutate_fun = periodReturn,
                period     = "monthly",
                col_rename = "Rb")
-```
 
-    ## Warning in to_period(xx, period = on.opts[[period]], ...): missing values
-    ## removed from data
-
-``` r
 # plot monthly returns
 dij_monthly_returns %>%
   ggplot(aes(date, Rb)) +
@@ -145,8 +140,12 @@ dji_yearly_returns <-
                mutate_fun = periodReturn,
                period     = "yearly",
                col_rename = "Rb")
+```
 
+    ## Warning in to_period(xx, period = on.opts[[period]], ...): missing values
+    ## removed from data
 
+``` r
 # plot yearly returns
 dji_yearly_returns  %>%
   ggplot(aes(year(date), Rb)) +
