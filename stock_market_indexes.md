@@ -4,9 +4,9 @@ DanielH
 December 29, 2018
 
 -   [the Standard & Poor's 500 (S&P 500)](#the-standard-poors-500-sp-500)
--   [nasdaq index composite](#nasdaq-index-composite)
+-   [nasdaq composite (NASDAQ)](#nasdaq-composite-nasdaq)
 -   [dow jones industrial average (DJIA)](#dow-jones-industrial-average-djia)
--   [Russell 2000](#russell-2000)
+-   [Russell 2000 (RUT)](#russell-2000-rut)
 
 ``` r
 library(tidyverse)
@@ -58,7 +58,17 @@ sp500_daily_returns %>%
   labs(title = "S&P 500 daily returns",
        subtitle = "2005-2018",
        x = "", y = "") +
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y")
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic"))
 ```
 
 ![](stock_market_indexes_files/figure-markdown_github/unnamed-chunk-2-1.png)
@@ -83,12 +93,20 @@ sp500_monthly_returns %>%
   geom_hline(yintercept = 0, color = "red") +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   scale_y_continuous(labels = percent_format(), limits = c(-.15, .1)) +
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
   labs(title = "S&P 500 daily returns",
        subtitle = "2005-2018",
        x = "", y = "")
 ```
-
-    ## Warning: Removed 2 rows containing missing values (geom_point).
 
 ![](stock_market_indexes_files/figure-markdown_github/unnamed-chunk-2-2.png)
 
@@ -110,6 +128,16 @@ sp500_yearly_returns %>%
   geom_bar(stat = "identity", fill = "darkgreen") +
   scale_x_continuous(breaks =  seq.int(2005, 2018, 1)) +
   scale_y_continuous(labels = percent_format()) +
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
   labs(title = "S&P 500 yearly returns",
        subtitle = "2005-2018",
        x = "", y = "")
@@ -117,8 +145,8 @@ sp500_yearly_returns %>%
 
 ![](stock_market_indexes_files/figure-markdown_github/unnamed-chunk-2-3.png)
 
-nasdaq index composite
-----------------------
+nasdaq composite (NASDAQ)
+-------------------------
 
 <https://www.investopedia.com/terms/n/nasdaqcompositeindex.asp>
 
@@ -150,6 +178,16 @@ nasdaq_daily_returns %>%
   geom_line(color = "goldenrod4") +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   scale_y_continuous(labels = percent_format()) +
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
   labs(title = "NASDAQ daily returns",
        subtitle = "2005 - 2018",
         x = "", y = "")
@@ -178,6 +216,16 @@ nasdaq_monthly_returns %>%
   geom_hline(yintercept = 0) +
   scale_y_continuous(labels = percent_format(), limits = c(-.2, .16)) +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
   labs(title = "NASDAQ monthly returns",
        subtitle = "2005 - 2018",
         x = "", y = "")
@@ -204,6 +252,16 @@ nasdaq_yearly_returns %>%
   geom_bar(stat = "identity", fill = "goldenrod4") +
   scale_x_continuous(breaks =  seq.int(2005, 2018, 1)) +
   scale_y_continuous(labels = percent_format(), limits = c(-.48, .48)) +
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
   labs(title = "NASDAQ yearly returns",
        subtitle = "2005 - 2018",
         x = "", y = "")
@@ -220,12 +278,20 @@ nasdaq_daily_returns %>%
   geom_smooth(color =  "black", size = .75) +
   scale_y_continuous(labels = percent_format()) +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
   labs(title = "NASDAQ performance",
        subtitle = "2005 - 2018",
         x = "", y = "")
 ```
-
-    ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 
 ![](stock_market_indexes_files/figure-markdown_github/unnamed-chunk-3-4.png)
 
@@ -260,12 +326,22 @@ dij_daily_returns <-
 # plot daily returns
 dij_daily_returns %>%
   ggplot(aes(date, Rb)) +
-  geom_line(alpha = .6, color = "steelblue", size = .2) +
+  geom_line(color = "steelblue", size = .2) +
   geom_hline(yintercept = 0, color = "red") +
   scale_y_continuous(labels = percent_format(),
                      limits = c(-.10, .10)) +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
-  labs(title = "Dow Jones Industrial daily returns",
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
+  labs(title = "DJIA daily returns",
        subtitle = "2005 - 2018",
         x = "", y = "")
 ```
@@ -294,7 +370,17 @@ dij_monthly_returns %>%
              size = .7) +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
   scale_y_continuous(labels = percent_format()) +
-  labs(title = "Dow Jones Industrial monthly returns",
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
+  labs(title = "DJIA monthly returns",
        subtitle = "2005 - 2018",
         x = "", y = "")
 ```
@@ -321,15 +407,25 @@ dji_yearly_returns  %>%
   scale_x_continuous(breaks =  seq.int(2005, 2018, 1)) +
   scale_y_continuous(labels = percent_format(), limits = c(-0.4, 0.3),
                      breaks = c(-0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3)) +
-  labs(title = "Dow Jones Industrial yearly returns",
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
+  labs(title = "DJIA yearly returns",
        subtitle = "2005 - 2018",
         x = "", y = "")
 ```
 
 ![](stock_market_indexes_files/figure-markdown_github/unnamed-chunk-4-3.png)
 
-Russell 2000
-------------
+Russell 2000 (RUT)
+------------------
 
 <https://www.investopedia.com/terms/r/russell2000.asp>
 
@@ -358,6 +454,16 @@ russ2000_daily_returns %>%
   scale_y_continuous(labels = percent_format(),
                      limits = c(-.15, .10)) +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
   labs(title = "Russell 2000 daily returns",
        subtitle = "2005 - 2018",
         x = "", y = "")
@@ -386,6 +492,16 @@ russ2000_monthly_returns %>%
   geom_hline(yintercept = 0, size = 1) +
   scale_y_continuous(labels = percent_format()) +
   scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
   labs(title = "Russell 2000 monthly returns",
        subtitle = "2005 - 2018",
         x = "", y = "")
@@ -412,7 +528,18 @@ russ2000_yearly_returns %>%
   scale_x_continuous(breaks =  seq.int(2005, 2018, 1)) +
   scale_y_continuous(labels = percent_format(),
                      limits = c(-0.4, 0.4)) +
-  labs(title = "Russell 2000 Yearly returns, 2010 - 2018",
+  theme(plot.title = element_text(size = 20,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 14,
+                                     hjust = 0.5,
+                                     face = "italic")) +
+  labs(title = "Russell 2000 Yearly returns",
+       subtitle = "2010 - 2018",
        x = "", y = "")
 ```
 
