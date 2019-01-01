@@ -7,6 +7,7 @@ December 29, 2018
 -   [nasdaq composite (NASDAQ)](#nasdaq-composite-nasdaq)
 -   [dow jones industrial average (DJIA)](#dow-jones-industrial-average-djia)
 -   [Russell 2000 (RUT)](#russell-2000-rut)
+-   [total returns 2009 - 2018](#total-returns-2009---2018)
 
 ``` r
 library(tidyverse)
@@ -14,6 +15,7 @@ library(purrrlyr)
 library(tidyquant)
 library(XLConnect)
 library(gridExtra)
+library(ggthemes)
 library(ggthemes)
 library(scales)
 library(knitr)
@@ -538,9 +540,60 @@ russ2000_yearly_returns %>%
         plot.subtitle = element_text(size = 14,
                                      hjust = 0.5,
                                      face = "italic")) +
-  labs(title = "Russell 2000 Yearly returns",
+  labs(title = "Russell 2000 yearly returns",
        subtitle = "2005 - 2018",
        x = "", y = "")
 ```
 
 ![](stock_market_indexes_files/figure-markdown_github/unnamed-chunk-5-3.png)
+
+total returns 2009 - 2018
+-------------------------
+
+``` r
+tibble(`stock index` = c("S&P 500", "NASDAQ", "DJIA", "Russell 2000"),
+       ytd = c(sp500_yearly_returns %>% tail(1) %>% .[[2]],
+               nasdaq_yearly_returns %>% tail(1) %>% .[[2]],
+               dji_yearly_returns %>% tail(1) %>% .[[2]],
+               russ2000_yearly_returns %>% tail(1) %>% .[[2]])) %>%
+  mutate(ytd = percent(ytd, accuracy = .1)) %>% 
+  spread(`stock index`, ytd) %>%
+  select(4,2,1,3) %>%
+  kable()
+```
+
+| S&P 500 | NASDAQ | DJIA  | Russell 2000 |
+|:--------|:-------|:------|:-------------|
+| -6.2%   | -3.9%  | -5.6% | -12.2%       |
+
+``` r
+#plot
+tibble(`stock index` = c("S&P 500", "NASDAQ", "DJIA", "Russell 2000"),
+       ytd = c(sp500_yearly_returns %>% tail(1) %>% .[[2]],
+               nasdaq_yearly_returns %>% tail(1) %>% .[[2]],
+               dji_yearly_returns %>% tail(1) %>% .[[2]],
+               russ2000_yearly_returns %>% tail(1) %>% .[[2]])) %>%
+  dmap_at(1, as_factor) %>%
+  ggplot(aes(`stock index`, ytd, fill = `stock index`)) +
+  geom_bar(stat = "identity", show.legend = F) +
+  scale_fill_tableau(palette = "Tableau 10") +
+  scale_y_continuous(labels = percent_format()) +
+  theme(plot.title = element_text(size = 18,
+                                  family = "Times",
+                                  face = "bold",
+                                  color = "black",
+                                  hjust = 0.5,
+                                  vjust = 2,
+                                  lineheight = 2),
+        plot.subtitle = element_text(size = 12,
+                                     hjust = 0.5,
+                                     face = "italic"),
+        axis.text.x = element_text(face = "bold",
+                                   color = "black",
+                                   size = 10)) +
+  labs(title = "Major Markets 2018 Performance ",
+       subtitle = "all major indexes show negative returns",
+       x = "", y = "")
+```
+
+![](stock_market_indexes_files/figure-markdown_github/unnamed-chunk-6-1.png)
