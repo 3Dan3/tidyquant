@@ -103,7 +103,7 @@ sp500_monthly_returns %>%
         plot.subtitle = element_text(size = 14,
                                      hjust = 0.5,
                                      face = "italic")) +
-  labs(title = "S&P 500 daily returns",
+  labs(title = "S&P 500 monthly returns",
        subtitle = "2005-2018",
        x = "", y = "")
 ```
