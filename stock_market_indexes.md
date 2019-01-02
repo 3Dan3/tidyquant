@@ -552,6 +552,10 @@ total returns 2009 - 2018
 
 We now want to see how each index has beeenperforming over the last...(to be completed)
 
+The following chunk can be removed because we show a more comprehensive table in a later section of the document.
+
+Btw, the following comprehensive table has to be extended to cover 20 years of data for the four indexes
+
 ``` r
 # table
 tibble(`stock index` = c("SP500", "NASDAQ", "DJIA", "RUT"),
