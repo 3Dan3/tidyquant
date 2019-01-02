@@ -603,7 +603,7 @@ RUT
 </tr>
 </tbody>
 </table>
-this chunk doesn' t render the way ti should, check it out!
+this chunk doesn't render the way it should, check it out!
 
 ``` r
 # plot
@@ -634,15 +634,6 @@ tibble(`stock index` = c("SP500", "NASDAQ", "DJIA", "RUT"),
        subtitle = "all major indexes show negative returns",
        x = "", y = "")
 ```
-
-    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, :
-    ## font family not found in Windows font database
-
-    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, :
-    ## font family not found in Windows font database
-
-    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, :
-    ## font family not found in Windows font database
 
 ![](stock_market_indexes_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
