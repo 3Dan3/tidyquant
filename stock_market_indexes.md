@@ -804,7 +804,7 @@ RUT
 15.91%
 </td>
 <td style="text-align:left;">
-7.26%
+6.65%
 </td>
 <td style="text-align:left;">
 14.63%
@@ -821,7 +821,7 @@ RUT
 -1.80%
 </td>
 <td style="text-align:left;">
-5.53%
+6.13%
 </td>
 <td style="text-align:left;">
 -5.45%
@@ -934,7 +934,9 @@ RUT
 
 ------------------------------------------------------------------------
 
-### format table
+### try to format table
+
+The kableExtra formatting doesn't get rendered in .md files (`Knit to github_document`)
 
 ``` r
 mutate(dowjones = cell_spec(dowjones, color = ifelse(dowjones < 0, "red", "black")),
