@@ -805,7 +805,7 @@ RUT
 15.91%
 </td>
 <td style="text-align:left;">
-6.65%
+7.26%
 </td>
 <td style="text-align:left;">
 14.63%
@@ -822,7 +822,7 @@ RUT
 -1.80%
 </td>
 <td style="text-align:left;">
-6.13%
+5.53%
 </td>
 <td style="text-align:left;">
 -5.45%
