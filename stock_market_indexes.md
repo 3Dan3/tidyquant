@@ -597,3 +597,58 @@ tibble(`stock index` = c("S&P 500", "NASDAQ", "DJIA", "Russell 2000"),
 ```
 
 ![](stock_market_indexes_files/figure-markdown_github/unnamed-chunk-6-1.png)
+
+``` r
+# return tibble
+return_tibble <-
+  tribble(~index, ~return,
+        "sp500", c(sp500_yearly_returns %>% .[[2]]),
+        "nasdaq", c(nasdaq_yearly_returns %>% .[[2]]),
+        "dowjones", c(dji_yearly_returns %>% .[[2]]),
+        "russ2000", c(russ2000_yearly_returns %>% .[[2]])) %>%
+  unnest(return) %>% 
+  mutate(year = rep(2018:2005, 4)) %>%
+  select(3,1,2) %>%
+  spread(year, return)
+
+##  long format tibble
+
+# get names
+column_names <-
+  return_tibble %>%
+  pull(index)
+
+# long tibble
+long_return_tbl <-
+  return_tibble %>%
+  t %>%
+  as_tibble() %>%
+  slice(-1)
+
+colnames(long_return_tbl) <- column_names
+  
+# add year column and format values
+long_return_tbl %>%
+  mutate(year = rep(2018:2005)) %>%
+  select(5, everything()) %>%
+  dmap_at(c(2:5), as.numeric) %>% 
+  dmap_if(is_double, percent, accuracy = .1) %>%
+  kable()
+```
+
+|  year| dowjones | nasdaq | russ2000 | sp500  |
+|-----:|:---------|:-------|:---------|:-------|
+|  2018| -5.6%    | -3.9%  | -12.2%   | -6.2%  |
+|  2017| 25.1%    | 28.2%  | 13.1%    | 19.4%  |
+|  2016| 13.4%    | 7.5%   | 19.5%    | 9.5%   |
+|  2015| -2.2%    | 5.7%   | -5.7%    | -0.7%  |
+|  2014| 7.5%     | 13.4%  | 3.5%     | 11.4%  |
+|  2013| 26.5%    | 38.3%  | 37.0%    | 29.6%  |
+|  2012| 7.3%     | 15.9%  | 14.6%    | 13.4%  |
+|  2011| 5.5%     | -1.8%  | -5.5%    | 0.0%   |
+|  2010| 11.0%    | 16.9%  | 25.3%    | 12.8%  |
+|  2009| 18.8%    | 43.9%  | 25.2%    | 23.5%  |
+|  2008| -33.8%   | -40.5% | -34.8%   | -38.5% |
+|  2007| 6.4%     | 9.8%   | -2.7%    | 3.5%   |
+|  2006| 16.3%    | 9.5%   | 17.0%    | 13.6%  |
+|  2005| -0.1%    | 2.5%   | 5.1%     | 3.8%   |
