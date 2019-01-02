@@ -551,12 +551,12 @@ total returns 2009 - 2018
 -------------------------
 
 ``` r
-tibble(`stock index` = c("S&P 500", "NASDAQ", "DJIA", "Russell 2000"),
+tibble(`stock index` = c("SP500", "NASDAQ", "DJIA", "RUT"),
        ytd = c(sp500_yearly_returns %>% tail(1) %>% .[[2]],
                nasdaq_yearly_returns %>% tail(1) %>% .[[2]],
                dji_yearly_returns %>% tail(1) %>% .[[2]],
                russ2000_yearly_returns %>% tail(1) %>% .[[2]])) %>%
-  mutate(ytd = percent(ytd, accuracy = .1)) %>% 
+  mutate(ytd = percent(ytd, accuracy = .01)) %>% 
   spread(`stock index`, ytd) %>%
   select(4,2,1,3) %>%
   kable()
@@ -566,7 +566,7 @@ tibble(`stock index` = c("S&P 500", "NASDAQ", "DJIA", "Russell 2000"),
 <thead>
 <tr>
 <th style="text-align:left;">
-S&P 500
+SP500
 </th>
 <th style="text-align:left;">
 NASDAQ
@@ -575,30 +575,30 @@ NASDAQ
 DJIA
 </th>
 <th style="text-align:left;">
-Russell 2000
+RUT
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
--6.2%
+-6.24%
 </td>
 <td style="text-align:left;">
--3.9%
+-3.88%
 </td>
 <td style="text-align:left;">
--5.6%
+-5.63%
 </td>
 <td style="text-align:left;">
--12.2%
+-12.18%
 </td>
 </tr>
 </tbody>
 </table>
 ``` r
 #plot
-tibble(`stock index` = c("S&P 500", "NASDAQ", "DJIA", "Russell 2000"),
+tibble(`stock index` = c("SP500", "NASDAQ", "DJIA", "RUT"),
        ytd = c(sp500_yearly_returns %>% tail(1) %>% .[[2]],
                nasdaq_yearly_returns %>% tail(1) %>% .[[2]],
                dji_yearly_returns %>% tail(1) %>% .[[2]],
@@ -632,10 +632,10 @@ tibble(`stock index` = c("S&P 500", "NASDAQ", "DJIA", "Russell 2000"),
 # return tibble
 return_tibble <-
   tribble(~index, ~return,
-        "sp500", c(sp500_yearly_returns %>% .[[2]]),
-        "nasdaq", c(nasdaq_yearly_returns %>% .[[2]]),
-        "dowjones", c(dji_yearly_returns %>% .[[2]]),
-        "russ2000", c(russ2000_yearly_returns %>% .[[2]])) %>%
+        "SP500", c(sp500_yearly_returns %>% .[[2]]),
+        "NASDAQ", c(nasdaq_yearly_returns %>% .[[2]]),
+        "DJIA", c(dji_yearly_returns %>% .[[2]]),
+        "RUT", c(russ2000_yearly_returns %>% .[[2]])) %>%
   unnest(return) %>% 
   mutate(year = rep(2018:2005, 4)) %>%
   select(3,1,2) %>%
@@ -663,7 +663,7 @@ indexes_return_table <-
   mutate(year = rep(2018:2005)) %>%
   select(5, everything()) %>%
   dmap_at(c(2:5), as.numeric) %>% 
-  dmap_if(is_double, percent, accuracy = .1) %>%
+  dmap_if(is_double, percent, accuracy = .01) %>%
   select(1,5,3,2,4)
 
 indexes_return_table %>%
@@ -677,16 +677,16 @@ indexes_return_table %>%
 year
 </th>
 <th style="text-align:left;">
-sp500
+SP500
 </th>
 <th style="text-align:left;">
-nasdaq
+NASDAQ
 </th>
 <th style="text-align:left;">
-dowjones
+DJIA
 </th>
 <th style="text-align:left;">
-russ2000
+RUT
 </th>
 </tr>
 </thead>
@@ -696,16 +696,16 @@ russ2000
 2018
 </td>
 <td style="text-align:left;">
--6.2%
+-6.24%
 </td>
 <td style="text-align:left;">
--3.9%
+-3.88%
 </td>
 <td style="text-align:left;">
--5.6%
+-5.63%
 </td>
 <td style="text-align:left;">
--12.2%
+-12.18%
 </td>
 </tr>
 <tr>
@@ -713,16 +713,16 @@ russ2000
 2017
 </td>
 <td style="text-align:left;">
-19.4%
+19.42%
 </td>
 <td style="text-align:left;">
-28.2%
+28.24%
 </td>
 <td style="text-align:left;">
-25.1%
+25.08%
 </td>
 <td style="text-align:left;">
-13.1%
+13.14%
 </td>
 </tr>
 <tr>
@@ -730,16 +730,16 @@ russ2000
 2016
 </td>
 <td style="text-align:left;">
-9.5%
+9.54%
 </td>
 <td style="text-align:left;">
-7.5%
+7.50%
 </td>
 <td style="text-align:left;">
-13.4%
+13.42%
 </td>
 <td style="text-align:left;">
-19.5%
+19.48%
 </td>
 </tr>
 <tr>
@@ -747,16 +747,16 @@ russ2000
 2015
 </td>
 <td style="text-align:left;">
--0.7%
+-0.73%
 </td>
 <td style="text-align:left;">
-5.7%
+5.73%
 </td>
 <td style="text-align:left;">
--2.2%
+-2.23%
 </td>
 <td style="text-align:left;">
--5.7%
+-5.71%
 </td>
 </tr>
 <tr>
@@ -764,16 +764,16 @@ russ2000
 2014
 </td>
 <td style="text-align:left;">
-11.4%
+11.39%
 </td>
 <td style="text-align:left;">
-13.4%
+13.40%
 </td>
 <td style="text-align:left;">
-7.5%
+7.52%
 </td>
 <td style="text-align:left;">
-3.5%
+3.53%
 </td>
 </tr>
 <tr>
@@ -781,16 +781,16 @@ russ2000
 2013
 </td>
 <td style="text-align:left;">
-29.6%
+29.60%
 </td>
 <td style="text-align:left;">
-38.3%
+38.32%
 </td>
 <td style="text-align:left;">
-26.5%
+26.50%
 </td>
 <td style="text-align:left;">
-37.0%
+37.00%
 </td>
 </tr>
 <tr>
@@ -798,16 +798,16 @@ russ2000
 2012
 </td>
 <td style="text-align:left;">
-13.4%
+13.41%
 </td>
 <td style="text-align:left;">
-15.9%
+15.91%
 </td>
 <td style="text-align:left;">
-7.3%
+7.26%
 </td>
 <td style="text-align:left;">
-14.6%
+14.63%
 </td>
 </tr>
 <tr>
@@ -815,16 +815,16 @@ russ2000
 2011
 </td>
 <td style="text-align:left;">
-0.0%
+0.00%
 </td>
 <td style="text-align:left;">
--1.8%
+-1.80%
 </td>
 <td style="text-align:left;">
-5.5%
+5.53%
 </td>
 <td style="text-align:left;">
--5.5%
+-5.45%
 </td>
 </tr>
 <tr>
@@ -832,16 +832,16 @@ russ2000
 2010
 </td>
 <td style="text-align:left;">
-12.8%
+12.78%
 </td>
 <td style="text-align:left;">
-16.9%
+16.91%
 </td>
 <td style="text-align:left;">
-11.0%
+11.02%
 </td>
 <td style="text-align:left;">
-25.3%
+25.31%
 </td>
 </tr>
 <tr>
@@ -849,16 +849,16 @@ russ2000
 2009
 </td>
 <td style="text-align:left;">
-23.5%
+23.45%
 </td>
 <td style="text-align:left;">
-43.9%
+43.89%
 </td>
 <td style="text-align:left;">
-18.8%
+18.82%
 </td>
 <td style="text-align:left;">
-25.2%
+25.22%
 </td>
 </tr>
 <tr>
@@ -866,16 +866,16 @@ russ2000
 2008
 </td>
 <td style="text-align:left;">
--38.5%
+-38.49%
 </td>
 <td style="text-align:left;">
--40.5%
+-40.54%
 </td>
 <td style="text-align:left;">
--33.8%
+-33.84%
 </td>
 <td style="text-align:left;">
--34.8%
+-34.80%
 </td>
 </tr>
 <tr>
@@ -883,16 +883,16 @@ russ2000
 2007
 </td>
 <td style="text-align:left;">
-3.5%
+3.53%
 </td>
 <td style="text-align:left;">
-9.8%
+9.81%
 </td>
 <td style="text-align:left;">
-6.4%
+6.43%
 </td>
 <td style="text-align:left;">
--2.7%
+-2.75%
 </td>
 </tr>
 <tr>
@@ -900,16 +900,16 @@ russ2000
 2006
 </td>
 <td style="text-align:left;">
-13.6%
+13.62%
 </td>
 <td style="text-align:left;">
-9.5%
+9.52%
 </td>
 <td style="text-align:left;">
-16.3%
+16.29%
 </td>
 <td style="text-align:left;">
-17.0%
+17.00%
 </td>
 </tr>
 <tr>
@@ -917,16 +917,16 @@ russ2000
 2005
 </td>
 <td style="text-align:left;">
-3.8%
+3.84%
 </td>
 <td style="text-align:left;">
-2.5%
+2.47%
 </td>
 <td style="text-align:left;">
--0.1%
+-0.11%
 </td>
 <td style="text-align:left;">
-5.1%
+5.12%
 </td>
 </tr>
 </tbody>
