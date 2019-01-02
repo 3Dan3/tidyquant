@@ -551,6 +551,7 @@ total returns 2009 - 2018
 -------------------------
 
 ``` r
+# table
 tibble(`stock index` = c("SP500", "NASDAQ", "DJIA", "RUT"),
        ytd = c(sp500_yearly_returns %>% tail(1) %>% .[[2]],
                nasdaq_yearly_returns %>% tail(1) %>% .[[2]],
@@ -597,7 +598,7 @@ RUT
 </tbody>
 </table>
 ``` r
-#plot
+# plot
 tibble(`stock index` = c("SP500", "NASDAQ", "DJIA", "RUT"),
        ytd = c(sp500_yearly_returns %>% tail(1) %>% .[[2]],
                nasdaq_yearly_returns %>% tail(1) %>% .[[2]],
