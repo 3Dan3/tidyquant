@@ -939,6 +939,8 @@ RUT
 
 ### try to format table
 
+TO DO List, Thursday Jan 03
+
 The kableExtra formatting doesn't get rendered in .md files (`Knit to github_document`)
 
 ``` r
