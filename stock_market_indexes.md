@@ -13,7 +13,7 @@ December 29, 2018
 library(tidyverse)
 library(purrrlyr)
 library(tidyquant)
-library(huxtable)
+library(kableExtra)
 library(gridExtra)
 library(ggthemes)
 library(ggthemes)
@@ -562,10 +562,40 @@ tibble(`stock index` = c("S&P 500", "NASDAQ", "DJIA", "Russell 2000"),
   kable()
 ```
 
-| S&P 500 | NASDAQ | DJIA  | Russell 2000 |
-|:--------|:-------|:------|:-------------|
-| -6.2%   | -3.9%  | -5.6% | -12.2%       |
-
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+S&P 500
+</th>
+<th style="text-align:left;">
+NASDAQ
+</th>
+<th style="text-align:left;">
+DJIA
+</th>
+<th style="text-align:left;">
+Russell 2000
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+-6.2%
+</td>
+<td style="text-align:left;">
+-3.9%
+</td>
+<td style="text-align:left;">
+-5.6%
+</td>
+<td style="text-align:left;">
+-12.2%
+</td>
+</tr>
+</tbody>
+</table>
 ``` r
 #plot
 tibble(`stock index` = c("S&P 500", "NASDAQ", "DJIA", "Russell 2000"),
@@ -633,63 +663,294 @@ indexes_return_table <-
   mutate(year = rep(2018:2005)) %>%
   select(5, everything()) %>%
   dmap_at(c(2:5), as.numeric) %>% 
-  dmap_if(is_double, percent, accuracy = .1) 
-
+  dmap_if(is_double, percent, accuracy = .1) %>%
+  select(1,5,3,2,4)
 
 indexes_return_table %>%
   kable()
 ```
 
-|  year| dowjones | nasdaq | russ2000 | sp500  |
-|-----:|:---------|:-------|:---------|:-------|
-|  2018| -5.6%    | -3.9%  | -12.2%   | -6.2%  |
-|  2017| 25.1%    | 28.2%  | 13.1%    | 19.4%  |
-|  2016| 13.4%    | 7.5%   | 19.5%    | 9.5%   |
-|  2015| -2.2%    | 5.7%   | -5.7%    | -0.7%  |
-|  2014| 7.5%     | 13.4%  | 3.5%     | 11.4%  |
-|  2013| 26.5%    | 38.3%  | 37.0%    | 29.6%  |
-|  2012| 6.7%     | 15.9%  | 14.6%    | 13.4%  |
-|  2011| 6.1%     | -1.8%  | -5.5%    | 0.0%   |
-|  2010| 11.0%    | 16.9%  | 25.3%    | 12.8%  |
-|  2009| 18.8%    | 43.9%  | 25.2%    | 23.5%  |
-|  2008| -33.8%   | -40.5% | -34.8%   | -38.5% |
-|  2007| 6.4%     | 9.8%   | -2.7%    | 3.5%   |
-|  2006| 16.3%    | 9.5%   | 17.0%    | 13.6%  |
-|  2005| -0.1%    | 2.5%   | 5.1%     | 3.8%   |
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:left;">
+sp500
+</th>
+<th style="text-align:left;">
+nasdaq
+</th>
+<th style="text-align:left;">
+dowjones
+</th>
+<th style="text-align:left;">
+russ2000
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2018
+</td>
+<td style="text-align:left;">
+-6.2%
+</td>
+<td style="text-align:left;">
+-3.9%
+</td>
+<td style="text-align:left;">
+-5.6%
+</td>
+<td style="text-align:left;">
+-12.2%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+19.4%
+</td>
+<td style="text-align:left;">
+28.2%
+</td>
+<td style="text-align:left;">
+25.1%
+</td>
+<td style="text-align:left;">
+13.1%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2016
+</td>
+<td style="text-align:left;">
+9.5%
+</td>
+<td style="text-align:left;">
+7.5%
+</td>
+<td style="text-align:left;">
+13.4%
+</td>
+<td style="text-align:left;">
+19.5%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2015
+</td>
+<td style="text-align:left;">
+-0.7%
+</td>
+<td style="text-align:left;">
+5.7%
+</td>
+<td style="text-align:left;">
+-2.2%
+</td>
+<td style="text-align:left;">
+-5.7%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+11.4%
+</td>
+<td style="text-align:left;">
+13.4%
+</td>
+<td style="text-align:left;">
+7.5%
+</td>
+<td style="text-align:left;">
+3.5%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:left;">
+29.6%
+</td>
+<td style="text-align:left;">
+38.3%
+</td>
+<td style="text-align:left;">
+26.5%
+</td>
+<td style="text-align:left;">
+37.0%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+13.4%
+</td>
+<td style="text-align:left;">
+15.9%
+</td>
+<td style="text-align:left;">
+7.3%
+</td>
+<td style="text-align:left;">
+14.6%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2011
+</td>
+<td style="text-align:left;">
+0.0%
+</td>
+<td style="text-align:left;">
+-1.8%
+</td>
+<td style="text-align:left;">
+5.5%
+</td>
+<td style="text-align:left;">
+-5.5%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+12.8%
+</td>
+<td style="text-align:left;">
+16.9%
+</td>
+<td style="text-align:left;">
+11.0%
+</td>
+<td style="text-align:left;">
+25.3%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2009
+</td>
+<td style="text-align:left;">
+23.5%
+</td>
+<td style="text-align:left;">
+43.9%
+</td>
+<td style="text-align:left;">
+18.8%
+</td>
+<td style="text-align:left;">
+25.2%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+-38.5%
+</td>
+<td style="text-align:left;">
+-40.5%
+</td>
+<td style="text-align:left;">
+-33.8%
+</td>
+<td style="text-align:left;">
+-34.8%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2007
+</td>
+<td style="text-align:left;">
+3.5%
+</td>
+<td style="text-align:left;">
+9.8%
+</td>
+<td style="text-align:left;">
+6.4%
+</td>
+<td style="text-align:left;">
+-2.7%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2006
+</td>
+<td style="text-align:left;">
+13.6%
+</td>
+<td style="text-align:left;">
+9.5%
+</td>
+<td style="text-align:left;">
+16.3%
+</td>
+<td style="text-align:left;">
+17.0%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2005
+</td>
+<td style="text-align:left;">
+3.8%
+</td>
+<td style="text-align:left;">
+2.5%
+</td>
+<td style="text-align:left;">
+-0.1%
+</td>
+<td style="text-align:left;">
+5.1%
+</td>
+</tr>
+</tbody>
+</table>
+
+------------------------------------------------------------------------
 
 ### format table
 
 ``` r
-indexes_return_table2 <-
-  long_return_tbl %>%
-  mutate(year = rep(2018:2005)) %>%
-  select(5, everything()) %>%
-  dmap_at(c(2:5), as.numeric)
-
-
-
-indexes_return_table2 %>%
-  select(-1) %>% 
-  as_hux() %>%
-  map_text_color(by_quantiles(c(0.1, 0.9), c("red", "black", "green3")))
+mutate(dowjones = cell_spec(dowjones, color = ifelse(dowjones < 0, "red", "black")),
+         nasdaq =  cell_spec(nasdaq, color = ifelse(nasdaq < 0, "red", "black")),
+         russ2000 = cell_spec(russ2000, color = ifelse(russ2000 < 0, "red", "black")),
+         sp500 = cell_spec(sp500, color = ifelse(sp500 < 0, "red", "black"))) %>%
+  kable(format = "html",  escape = F) %>%
+  kable_styling("striped", full_width = F) 
 ```
 
-    ## Warning in knit_print.huxtable(x, ...): Unrecognized output format "markdown". Using `to_screen` to print huxtables.
-    ## Set options("huxtable.knitr_output_format") manually to "latex", "html", "rtf", "md" or "screen".
+<https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html>
 
--0.0563  -0.0388 -0.122  -0.0624  
-0.251   0.282  0.131  0.194   
-0.134   0.075  0.195  0.0954  
--0.0223  0.0573 -0.0571 -0.00727 
-0.0752  0.134  0.0353 0.114   
-0.265   0.383  0.37   0.296   
-0.0665  0.159  0.146  0.134   
-0.0613  -0.018  -0.0545 -3.18e-05
-0.11    0.169  0.253  0.128   
-0.188   0.439  0.252  0.235   
--0.338   -0.405  -0.348  -0.385   
-0.0643  0.0981 -0.0275 0.0353  
-0.163   0.0952 0.17   0.136   
--0.00111 0.0247 0.0512 0.0384  
+<https://hughjonesd.github.io/huxtable/huxtable.pdf>
 
-Column names: dowjones, nasdaq, russ2000, sp500
+<https://renkun-ken.github.io/formattable/>
+
+<https://davidgohel.github.io/flextable/index.html>
+
+------------------------------------------------------------------------
