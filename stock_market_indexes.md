@@ -13,7 +13,7 @@ December 29, 2018
 library(tidyverse)
 library(purrrlyr)
 library(tidyquant)
-library(XLConnect)
+library(huxtable)
 library(gridExtra)
 library(ggthemes)
 library(ggthemes)
@@ -628,11 +628,15 @@ long_return_tbl <-
 colnames(long_return_tbl) <- column_names
   
 # add year column and format values
-long_return_tbl %>%
+indexes_return_table <-
+  long_return_tbl %>%
   mutate(year = rep(2018:2005)) %>%
   select(5, everything()) %>%
   dmap_at(c(2:5), as.numeric) %>% 
-  dmap_if(is_double, percent, accuracy = .1) %>%
+  dmap_if(is_double, percent, accuracy = .1) 
+
+
+indexes_return_table %>%
   kable()
 ```
 
@@ -644,11 +648,48 @@ long_return_tbl %>%
 |  2015| -2.2%    | 5.7%   | -5.7%    | -0.7%  |
 |  2014| 7.5%     | 13.4%  | 3.5%     | 11.4%  |
 |  2013| 26.5%    | 38.3%  | 37.0%    | 29.6%  |
-|  2012| 7.3%     | 15.9%  | 14.6%    | 13.4%  |
-|  2011| 5.5%     | -1.8%  | -5.5%    | 0.0%   |
+|  2012| 6.7%     | 15.9%  | 14.6%    | 13.4%  |
+|  2011| 6.1%     | -1.8%  | -5.5%    | 0.0%   |
 |  2010| 11.0%    | 16.9%  | 25.3%    | 12.8%  |
 |  2009| 18.8%    | 43.9%  | 25.2%    | 23.5%  |
 |  2008| -33.8%   | -40.5% | -34.8%   | -38.5% |
 |  2007| 6.4%     | 9.8%   | -2.7%    | 3.5%   |
 |  2006| 16.3%    | 9.5%   | 17.0%    | 13.6%  |
 |  2005| -0.1%    | 2.5%   | 5.1%     | 3.8%   |
+
+### format table
+
+``` r
+indexes_return_table2 <-
+  long_return_tbl %>%
+  mutate(year = rep(2018:2005)) %>%
+  select(5, everything()) %>%
+  dmap_at(c(2:5), as.numeric)
+
+
+
+indexes_return_table2 %>%
+  select(-1) %>% 
+  as_hux() %>%
+  map_text_color(by_quantiles(c(0.1, 0.9), c("red", "black", "green3")))
+```
+
+    ## Warning in knit_print.huxtable(x, ...): Unrecognized output format "markdown". Using `to_screen` to print huxtables.
+    ## Set options("huxtable.knitr_output_format") manually to "latex", "html", "rtf", "md" or "screen".
+
+-0.0563  -0.0388 -0.122  -0.0624  
+0.251   0.282  0.131  0.194   
+0.134   0.075  0.195  0.0954  
+-0.0223  0.0573 -0.0571 -0.00727 
+0.0752  0.134  0.0353 0.114   
+0.265   0.383  0.37   0.296   
+0.0665  0.159  0.146  0.134   
+0.0613  -0.018  -0.0545 -3.18e-05
+0.11    0.169  0.253  0.128   
+0.188   0.439  0.252  0.235   
+-0.338   -0.405  -0.348  -0.385   
+0.0643  0.0981 -0.0275 0.0353  
+0.163   0.0952 0.17   0.136   
+-0.00111 0.0247 0.0512 0.0384  
+
+Column names: dowjones, nasdaq, russ2000, sp500
