@@ -550,6 +550,8 @@ russ2000_yearly_returns %>%
 total returns 2009 - 2018
 -------------------------
 
+We now want to see how each index has beeenperforming over the last...(to be completed)
+
 ``` r
 # table
 tibble(`stock index` = c("SP500", "NASDAQ", "DJIA", "RUT"),
@@ -627,7 +629,7 @@ tibble(`stock index` = c("SP500", "NASDAQ", "DJIA", "RUT"),
        x = "", y = "")
 ```
 
-![](stock_market_indexes_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](stock_market_indexes_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 ``` r
 # return tibble
