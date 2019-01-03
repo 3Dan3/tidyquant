@@ -8,6 +8,7 @@ December 29, 2018
 -   [dow jones industrial average (DJIA)](#dow-jones-industrial-average-djia)
 -   [Russell 2000 (RUT)](#russell-2000-rut)
 -   [total returns 2009 - 2018](#total-returns-2009---2018)
+-   [total returns 1999 - 2018](#total-returns-1999---2018)
 
 ``` r
 library(tidyverse)
@@ -45,7 +46,7 @@ sp500_daily_returns <-
   "^GSPC" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>%
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "daily",
@@ -81,7 +82,7 @@ sp500_monthly_returns <-
   "^GSPC" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>% 
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "monthly",
@@ -118,7 +119,7 @@ sp500_yearly_returns <-
   "^GSPC" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>% 
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "yearly",
@@ -168,7 +169,7 @@ nasdaq_daily_returns <-
   "^IXIC" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>%
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "daily",
@@ -203,7 +204,7 @@ nasdaq_monthly_returns <-
   "^IXIC" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>% 
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "monthly",
@@ -241,7 +242,7 @@ nasdaq_yearly_returns <-
   "^IXIC" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>% 
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "yearly",
@@ -318,7 +319,7 @@ dij_daily_returns <-
   "DJI" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>%
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "daily",
@@ -356,7 +357,7 @@ dij_monthly_returns <-
   "DJI" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>% 
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "monthly",
@@ -395,7 +396,7 @@ dji_yearly_returns <-
   "DJI" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>% 
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "yearly",
@@ -443,7 +444,7 @@ russ2000_daily_returns <-
   "^RUT" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>% 
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "daily",
@@ -479,7 +480,7 @@ russ2000_monthly_returns <-
   "^RUT" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>% 
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "monthly",
@@ -517,7 +518,7 @@ russ2000_yearly_returns <-
   "^RUT" %>%
   tq_get(get  = "stock.prices",
            from = "2005-01-01",
-           to   = today()) %>%
+           to   = "2019-01-01") %>% 
   tq_transmute(select     = adjusted,
                mutate_fun = periodReturn,
                period     = "yearly",
@@ -550,7 +551,7 @@ russ2000_yearly_returns %>%
 total returns 2009 - 2018
 -------------------------
 
-We now want to see how each index has beeenperforming over the last...(to be completed)
+We now want to see how each index has beeen performing over the last...(to be completed)
 
 The following chunk can be removed because we show a more comprehensive table in a later section of the document.
 
@@ -940,8 +941,505 @@ RUT
 </tr>
 </tbody>
 </table>
+total returns 1999 - 2018
+-------------------------
+
+We now want to see how each index has beeen performing over the last 20 years
+
+``` r
+# SP500
+sp500_yearly_returns_20 <-
+  "^GSPC" %>%
+  tq_get(get  = "stock.prices",
+           from = "1999-01-01",
+           to   = "2019-01-01") %>% 
+  tq_transmute(select     = adjusted,
+               mutate_fun = periodReturn,
+               period     = "yearly",
+               col_rename = "Rb")
+
+# NASDAQ
+nasdaq_yearly_returns_20 <-
+  "^IXIC" %>%
+   tq_get(get  = "stock.prices",
+           from = "1999-01-01",
+           to   = "2019-01-01") %>% 
+  tq_transmute(select     = adjusted,
+               mutate_fun = periodReturn,
+               period     = "yearly",
+               col_rename = "Rb")
+
+# DJIA
+dji_yearly_returns_20 <-
+  "DJI" %>%
+  tq_get(get  = "stock.prices",
+           from = "1999-01-01",
+           to   = "2019-01-01") %>% 
+  tq_transmute(select     = adjusted,
+               mutate_fun = periodReturn,
+               period     = "yearly",
+               col_rename = "Rb")
+
+
+# RUT
+russ2000_yearly_returns_20 <-
+  "^RUT" %>%
+  tq_get(get  = "stock.prices",
+           from = "1999-01-01",
+           to   = "2019-01-01") %>% 
+  tq_transmute(select     = adjusted,
+               mutate_fun = periodReturn,
+               period     = "yearly",
+               col_rename = "Rb")
+
+
+
+return_tibble <-
+  tribble(~index, ~return,
+        "SP500", c(sp500_yearly_returns_20 %>% .[[2]]),
+        "NASDAQ", c(nasdaq_yearly_returns_20 %>% .[[2]]),
+        "DJIA", c(dji_yearly_returns_20 %>% .[[2]]),
+        "RUT", c(russ2000_yearly_returns_20 %>% .[[2]])) %>%
+  unnest(return) %>% 
+  mutate(year = rep(2018:1999, 4)) %>%
+  select(3,1,2) %>%
+  spread(year, return)
+
+##  long format tibble
+
+# get names
+column_names <-
+  return_tibble %>%
+  pull(index)
+
+# long tibble
+long_return_tbl <-
+  return_tibble %>%
+  t %>%
+  as_tibble() %>%
+  slice(-1)
+
+colnames(long_return_tbl) <- column_names
+  
+# add year column and format values
+indexes_return_table <-
+  long_return_tbl %>%
+  mutate(year = rep(2018:1999)) %>%
+  select(5, everything()) %>%
+  dmap_at(c(2:5), as.numeric) %>% 
+  dmap_if(is_double, percent, accuracy = .01) %>%
+  select(1,5,3,2,4)
+
+colnames(indexes_return_table) <-
+  indexes_return_table %>%
+  names() %>%
+  str_to_lower()
+
+
+indexes_return_table %>%
+  rename(" " = year)  %>%
+  kable()
+```
+
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+</th>
+<th style="text-align:left;">
+sp500
+</th>
+<th style="text-align:left;">
+nasdaq
+</th>
+<th style="text-align:left;">
+djia
+</th>
+<th style="text-align:left;">
+rut
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2018
+</td>
+<td style="text-align:left;">
+-6.24%
+</td>
+<td style="text-align:left;">
+-3.88%
+</td>
+<td style="text-align:left;">
+-5.63%
+</td>
+<td style="text-align:left;">
+-12.18%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:left;">
+19.42%
+</td>
+<td style="text-align:left;">
+28.24%
+</td>
+<td style="text-align:left;">
+25.08%
+</td>
+<td style="text-align:left;">
+13.14%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2016
+</td>
+<td style="text-align:left;">
+9.54%
+</td>
+<td style="text-align:left;">
+7.50%
+</td>
+<td style="text-align:left;">
+13.42%
+</td>
+<td style="text-align:left;">
+19.48%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2015
+</td>
+<td style="text-align:left;">
+-0.73%
+</td>
+<td style="text-align:left;">
+5.73%
+</td>
+<td style="text-align:left;">
+-2.23%
+</td>
+<td style="text-align:left;">
+-5.71%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:left;">
+11.39%
+</td>
+<td style="text-align:left;">
+13.40%
+</td>
+<td style="text-align:left;">
+7.52%
+</td>
+<td style="text-align:left;">
+3.53%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:left;">
+29.60%
+</td>
+<td style="text-align:left;">
+38.32%
+</td>
+<td style="text-align:left;">
+26.50%
+</td>
+<td style="text-align:left;">
+37.00%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:left;">
+13.41%
+</td>
+<td style="text-align:left;">
+15.91%
+</td>
+<td style="text-align:left;">
+7.26%
+</td>
+<td style="text-align:left;">
+14.63%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2011
+</td>
+<td style="text-align:left;">
+0.00%
+</td>
+<td style="text-align:left;">
+-1.80%
+</td>
+<td style="text-align:left;">
+5.53%
+</td>
+<td style="text-align:left;">
+-5.45%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:left;">
+12.78%
+</td>
+<td style="text-align:left;">
+16.91%
+</td>
+<td style="text-align:left;">
+11.02%
+</td>
+<td style="text-align:left;">
+25.31%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2009
+</td>
+<td style="text-align:left;">
+23.45%
+</td>
+<td style="text-align:left;">
+43.89%
+</td>
+<td style="text-align:left;">
+18.82%
+</td>
+<td style="text-align:left;">
+25.22%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2008
+</td>
+<td style="text-align:left;">
+-38.49%
+</td>
+<td style="text-align:left;">
+-40.54%
+</td>
+<td style="text-align:left;">
+-33.84%
+</td>
+<td style="text-align:left;">
+-34.80%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2007
+</td>
+<td style="text-align:left;">
+3.53%
+</td>
+<td style="text-align:left;">
+9.81%
+</td>
+<td style="text-align:left;">
+6.43%
+</td>
+<td style="text-align:left;">
+-2.75%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2006
+</td>
+<td style="text-align:left;">
+13.62%
+</td>
+<td style="text-align:left;">
+9.52%
+</td>
+<td style="text-align:left;">
+16.29%
+</td>
+<td style="text-align:left;">
+17.00%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2005
+</td>
+<td style="text-align:left;">
+3.00%
+</td>
+<td style="text-align:left;">
+1.37%
+</td>
+<td style="text-align:left;">
+-0.61%
+</td>
+<td style="text-align:left;">
+3.32%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2004
+</td>
+<td style="text-align:left;">
+8.99%
+</td>
+<td style="text-align:left;">
+8.59%
+</td>
+<td style="text-align:left;">
+3.15%
+</td>
+<td style="text-align:left;">
+17.00%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2003
+</td>
+<td style="text-align:left;">
+26.38%
+</td>
+<td style="text-align:left;">
+50.01%
+</td>
+<td style="text-align:left;">
+25.32%
+</td>
+<td style="text-align:left;">
+45.37%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2002
+</td>
+<td style="text-align:left;">
+-23.37%
+</td>
+<td style="text-align:left;">
+-31.53%
+</td>
+<td style="text-align:left;">
+-16.76%
+</td>
+<td style="text-align:left;">
+-21.58%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2001
+</td>
+<td style="text-align:left;">
+-13.04%
+</td>
+<td style="text-align:left;">
+-21.05%
+</td>
+<td style="text-align:left;">
+-7.09%
+</td>
+<td style="text-align:left;">
+1.03%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2000
+</td>
+<td style="text-align:left;">
+-10.14%
+</td>
+<td style="text-align:left;">
+-39.29%
+</td>
+<td style="text-align:left;">
+-6.18%
+</td>
+<td style="text-align:left;">
+-4.20%
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1999
+</td>
+<td style="text-align:left;">
+19.64%
+</td>
+<td style="text-align:left;">
+84.29%
+</td>
+<td style="text-align:left;">
+25.18%
+</td>
+<td style="text-align:left;">
+19.82%
+</td>
+</tr>
+</tbody>
+</table>
 
 ------------------------------------------------------------------------
+
+#### summary stats
+
+``` r
+long_return_tbl %>%
+  mutate_all(as.numeric) %>% 
+  dmap(mean, na.rm = T)
+```
+
+    ## # A tibble: 1 x 4
+    ##     DJIA NASDAQ    RUT  SP500
+    ##    <dbl>  <dbl>  <dbl>  <dbl>
+    ## 1 0.0596 0.0977 0.0776 0.0514
+
+``` r
+long_return_tbl %>%
+  mutate_all(as.numeric) %>% 
+  summarize_all(funs(mean, sd)) %>%
+  gather("index", "value") %>%
+  dmap_at(2, percent)
+```
+
+    ## # A tibble: 8 x 2
+    ##   index       value
+    ##   <chr>       <chr>
+    ## 1 DJIA_mean   6.0% 
+    ## 2 NASDAQ_mean 9.8% 
+    ## 3 RUT_mean    7.8% 
+    ## 4 SP500_mean  5.1% 
+    ## 5 DJIA_sd     15.5%
+    ## 6 NASDAQ_sd   30.4%
+    ## 7 RUT_sd      19.4%
+    ## 8 SP500_sd    17.1%
+
+<https://www.investopedia.com/articles/basics/09/simplified-measuring-interpreting-volatility.asp>
 
 ### try to format table
 
@@ -950,12 +1448,63 @@ TO DO List, Thursday Jan 03
 The kableExtra formatting doesn't get rendered in .md files (`Knit to github_document`)
 
 ``` r
-mutate(dowjones = cell_spec(dowjones, color = ifelse(dowjones < 0, "red", "black")),
+# add this to the previous 20-year table
+  mutate(djia = cell_spec(djia, color = ifelse(djia < 0, "red", "black")),
          nasdaq =  cell_spec(nasdaq, color = ifelse(nasdaq < 0, "red", "black")),
-         russ2000 = cell_spec(russ2000, color = ifelse(russ2000 < 0, "red", "black")),
+         rut = cell_spec(rut, color = ifelse(rut < 0, "red", "black")),
          sp500 = cell_spec(sp500, color = ifelse(sp500 < 0, "red", "black"))) %>%
   kable(format = "html",  escape = F) %>%
-  kable_styling("striped", full_width = F) 
+  kable_styling("striped", full_width = F)
+
+
+colnames(indexes_return_table) <- 
+  indexes_return_table %>%
+    names() %>%
+      str_to_lower() 
+
+
+
+long_return_tbl %>%
+  mutate(year = rep(2018:1999)) %>%
+  select(5, everything()) %>%
+  dmap_at(c(2:5), as.numeric) %>% 
+  dmap_if(is_double, percent, accuracy = .01) %>%
+  select(1,5,3,2,4)
+
+
+indexes_return_table_long <-
+  indexes_return_table %>%
+  mutate(djia = cell_spec(djia, color = ifelse(djia < 0, "red", "black")),
+         nasdaq =  cell_spec(nasdaq, color = ifelse(nasdaq < 0, "red", "black")),
+         rut = cell_spec(rut, color = ifelse(rut < 0, "red", "black")),
+         sp500 = cell_spec(sp500, color = ifelse(sp500 < 0, "red", "black"))) %>%
+  kable(format = "html",  escape = F) %>%
+  kable_styling("striped", full_width = F)
+
+
+
+indexes_return_table <-
+  indexes_return_table %>%
+  rename(" " = year) %>%
+  mutate(djia = cell_spec(djia, color = ifelse(djia < 0, "red", "black")),
+         nasdaq =  cell_spec(nasdaq, color = ifelse(nasdaq < 0, "red", "black")),
+         rut = cell_spec(rut, color = ifelse(rut < 0, "red", "black")),
+         sp500 = cell_spec(sp500, color = ifelse(sp500 < 0, "red", "black"))) 
+
+
+colnames(indexes_return_table) <-
+  indexes_return_table %>%
+  names() %>%
+  map_at(2:5, str_to_upper) %>%
+  as_vector()
+
+
+
+
+indexes_return_table %>%
+  rename(" " = year) %>% 
+  kable(format = "html",  escape = F) %>%
+  kable_styling("striped", full_width = F)
 ```
 
 <https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html>
